@@ -7,7 +7,6 @@ from threading import Timer # Timers
 from ctypes import windll
 from functools import partial # Used for passing arguments to a function when binding tkinter objects
 from tkinter import *  # Tkinter is used to make UI design stuff
-import os
 
 from pynput import mouse as positionMouse
 from pynput.mouse import Button as MouseButton, Controller
@@ -361,13 +360,13 @@ for x in range(0, 3): # Creates 3 settings buttons
     # Button
     settingsButton = Button(MainSettingsFrame, width=10, text=settingsButtonsText[x], font=("Arial", 14, "bold"), bg=gray20, activebackground=gray10, fg="white", activeforeground="white", borderwidth=1)
     settingsButton.config(command=partial(settingsButtonClicked, settingsButton))
-    settingsButton.grid(row=x+1, column=0, sticky="NW", padx=(20, 10), pady=7)
+    settingsButton.grid(row=x+2, column=0, sticky="NW", padx=(20, 10), pady=7)
     settingsButton.bind("<Enter>", lambda event:tkinterButton_enter(event, gray15))
     settingsButton.bind("<Leave>", lambda event:tkinterButton_enter(event, gray20))
 
     # Label
     settingsLabel = Label(MainSettingsFrame, bg=gray25, text=settingsLabelsText[x], font=("Arial", 12), fg="white", wraplength=280, justify=LEFT)
-    settingsLabel.grid(row=x+1, column=1, sticky="w", padx = 10)
+    settingsLabel.grid(row=x+2, column=1, sticky="w", padx = 10)
 
     # Storing the button and label
     settingsButtons.append(settingsButton)
@@ -751,6 +750,9 @@ listener = positionMouse.Listener(on_click=on_click)
 listener.start()
 
 
+
+
+
 RunPageFrame = Frame(window, bg=gray25,highlightthickness=0) # Frame for everything on the main page
 
 RunPageTitleText = "Automation is Running" # Page title text
@@ -887,7 +889,10 @@ def increasePowerupCommandCount():
 
 
 def enterCommand(command):
-    mouse.position = (PositionValues[0][0], PositionValues[0][1])
+    chatBarPos = (PositionValues[0][0], PositionValues[0][1])
+    
+    mouse.position = chatBarPos
+    print(mouse.position)
     sleep(0.1)
     mouse.press(MouseButton.left)
     mouse.release(MouseButton.left)
@@ -902,14 +907,11 @@ def enterCommand(command):
 def postMemeCommand():
     enterCommand("pls pm")
     sleep(1)
-    mouse.position = (PositionValues[1][0], PositionValues[1][1])
+    postMemeOptionPos = (PositionValues[1][0], PositionValues[1][1])
+    mouse.position = postMemeOptionPos
     sleep(0.1)
     mouse.press(MouseButton.left)
     mouse.release(MouseButton.left)
-
-# start_time = time.time()
-# sleep(5)
-# print("--- %s seconds ---" % (time.time() - start_time))
 
 def runBegCommand():
     while True:
@@ -1244,6 +1246,10 @@ def addKeyboardListener():
         listener.join()
 
 Timer(0, addKeyboardListener).start()
+
+import ctypes
+awareness = ctypes.c_int()
+ctypes.windll.shcore.SetProcessDpiAwareness(2)
 
 def main_loop():
     root.wm_attributes("-topmost", True)
