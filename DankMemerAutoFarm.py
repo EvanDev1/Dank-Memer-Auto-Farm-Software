@@ -831,7 +831,7 @@ lastAmmo = None
 
 # Item durations
 luckyDuration = 15 * 60
-pizzaDuration = 2 * 60 * 60
+pizzaDuration = 1 * 60 * 60
 coinDuration = 6 * 60 * 60
 ammoDuration = 20 * 60
 
