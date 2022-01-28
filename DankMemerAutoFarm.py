@@ -906,7 +906,7 @@ def enterCommand(command):
 
 def postMemeCommand():
     enterCommand("pls pm")
-    sleep(1)
+    sleep(3)
     postMemeOptionPos = (PositionValues[1][0], PositionValues[1][1])
     mouse.position = postMemeOptionPos
     sleep(0.1)
