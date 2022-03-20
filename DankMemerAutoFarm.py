@@ -799,7 +799,7 @@ begCooldown = 45
 fishCooldown = 40
 huntCooldown = 40
 digCooldown = 40
-postMemeCooldown = 40
+postMemeCooldown = 50
 landmineCooldown = 30
 padlockCooldown = 30
 
@@ -1152,7 +1152,7 @@ def RunBot():
         fishCooldown = 30
         huntCooldown = 30
         digCooldown = 30
-        postMemeCooldown = 30
+        postMemeCooldown = 45
 
     if (CommandsChosen[0] == True):
         global lastBeg
